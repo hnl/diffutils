@@ -176,7 +176,11 @@ verify (LIN_MAX <= TYPE_MAXIMUM (printint));
 #endif
 
 #ifndef NULL_DEVICE
-# define NULL_DEVICE "/dev/null"
+# if defined __amigaos4__ && defined __CLIB2__ /* amigaos4 clib2 */
+#  define NULL_DEVICE "/nil"
+# else
+#  define NULL_DEVICE "/dev/null"
+# endif
 #endif
 
 /* Do struct stat *S, *T describe the same special file?  */
