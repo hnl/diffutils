@@ -1,0 +1,9 @@
+IF EXISTS SDK:
+
+   DELETE SDK:Local/C/cmp FORCE
+   DELETE SDK:Local/C/diff3 FORCE
+   DELETE SDK:Local/C/diff FORCE
+   DELETE SDK:Local/C/sdiff FORCE
+   Copy SDK/#? SDK: ALL CLONE QUIET
+
+ENDIF
