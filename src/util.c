@@ -28,6 +28,15 @@
 #include "xvasprintf.h"
 #include <signal.h>
 
+#if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+#ifndef SIGSTOP
+# define SIGSTOP (-1)
+#endif
+#ifndef SIGTSTP
+# define SIGTSTP (-1)
+#endif
+#endif
+
 /* Use SA_NOCLDSTOP as a proxy for whether the sigaction machinery is
    present.  */
 #ifndef SA_NOCLDSTOP
@@ -246,8 +255,13 @@ install_signal_handlers (void)
       /* This one is handled specially.  */
       SIGTSTP,
 
+#if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+      /* The usual suspects.  */
+      SIGINT, SIGTERM,
+#else
       /* The usual suspects.  */
       SIGALRM, SIGHUP, SIGINT, SIGPIPE, SIGQUIT, SIGTERM,
+#endif
 #ifdef SIGPOLL
       SIGPOLL,
 #endif

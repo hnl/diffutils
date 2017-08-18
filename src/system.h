@@ -53,7 +53,12 @@
 #include <fcntl.h>
 #include <time.h>
 
+#if !(defined __amigaos4__ && defined __CLIB2__) /* AmigaOS4 CLIB2 */
 #include <sys/wait.h>
+#else
+#define WIFEXITED(x)	(((x) & 0177) == 0)
+#define WEXITSTATUS(x)	(int)(((unsigned)(x) >> 8) & 0xff)
+#endif
 
 #include <dirent.h>
 #ifndef _D_EXACT_NAMLEN

@@ -1,0 +1,18 @@
+diffutils 3.6 ported to AmigaOS4.
+
+Linked to clib2 with -lunix for it to understand POSIX style paths.
+
+You can use the diff command to show differences between two files, or each
+corresponding file in two directories.
+You can use the cmp command to show the offsets and line numbers where two files
+differ.
+You can use the diff3 command to show differences among three files.
+You can use the sdiff command to merge two files interactively.
+
+The sourcecode can be found here: https://github.com/hnl/diffutils
+
+Please read the original README file that is in the same directory.
+
+Best regards,
+Henning Nielsen Lund
+hnl_dk@amigaos.dk

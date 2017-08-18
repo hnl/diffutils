@@ -24,9 +24,7 @@
 
 # include <stdio.h>
 
-# if HAVE_MSVC_INVALID_PARAMETER_HANDLER
-#  include "msvc-inval.h"
-# endif
+# include "msvc-inval.h"
 
 # if HAVE_MSVC_INVALID_PARAMETER_HANDLER
 static int
@@ -46,8 +44,7 @@ _setmaxstdio_nothrow (int newmax)
 
   return result;
 }
-# else
-#  define _setmaxstdio_nothrow _setmaxstdio
+#  define _setmaxstdio _setmaxstdio_nothrow
 # endif
 
 /* Cache for the previous getdtablesize () result.  Safe to cache because
@@ -79,9 +76,9 @@ getdtablesize (void)
          freed when we call _setmaxstdio with the original value.  */
       int orig_max_stdio = _getmaxstdio ();
       unsigned int bound;
-      for (bound = 0x10000; _setmaxstdio_nothrow (bound) < 0; bound = bound / 2)
+      for (bound = 0x10000; _setmaxstdio (bound) < 0; bound = bound / 2)
         ;
-      _setmaxstdio_nothrow (orig_max_stdio);
+      _setmaxstdio (orig_max_stdio);
       dtablesize = bound;
     }
   return dtablesize;
@@ -104,6 +101,10 @@ getdtablesize (void)
      hits the compile-time constant hard limit of 3200.  We might as
      well just report the hard limit.  */
 #  define rlim_cur rlim_max
+# endif
+
+# if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+#  define RLIMIT_NOFILE RLIM_NOFILE
 # endif
 
 int
