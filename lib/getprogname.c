@@ -51,9 +51,13 @@
 # include <sys/procfs.h>
 #endif
 
-#if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+#if defined __amigaos__ /* AmigaOS */
+# define __USE_INLINE__ 1
 # include <dos/dos.h>
 # include <proto/dos.h>
+# if defined __amigaos4__
+#  include <dos/obsolete.h>
+# endif
 #endif
 
 #include "dirname.h"
@@ -182,11 +186,11 @@ getprogname (void)
         }
     }
   return NULL;
-#elif defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+# elif defined __amigaos__ /* AmigaOS */
   char * name;
 
-  if (IDOS->GetCliProgramName(name, PATH_MAX))
-	  return IDOS->FilePart(name);
+  if (GetProgramName(name, PATH_MAX))
+	  return FilePart(name);
   return "unknown";
 # else
 #  error "getprogname module not ported to this OS"

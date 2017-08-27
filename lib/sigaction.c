@@ -64,7 +64,7 @@
 # define SIGSTOP (-1)
 #endif
 
-#if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+#if defined __amigaos__ && defined __CLIB2__ /* AmigaOS using CLIB2 */
 #define NSIG 7
 
 int

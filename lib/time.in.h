@@ -152,6 +152,7 @@ _GL_CXXALIAS_SYS (mktime, time_t, (struct tm *__tp));
 _GL_CXXALIASWARN (mktime);
 # endif
 
+#if !(defined __amigaos__ && defined __CLIB2__) /* AmigaOS using CLIB2 */
 /* Convert TIMER to RESULT, assuming local time and UTC respectively.  See
    <http://www.opengroup.org/susv3xsh/localtime_r.html> and
    <http://www.opengroup.org/susv3xsh/gmtime_r.html>.  */
@@ -234,6 +235,7 @@ _GL_CXXALIAS_SYS (gmtime, struct tm *, (time_t const *__timer));
 #  endif
 _GL_CXXALIASWARN (gmtime);
 # endif
+#endif /* AmigaOS and clib2 */
 
 /* Parse BUF as a timestamp, assuming FORMAT specifies its layout, and store
    the resulting broken-down time into TM.  See

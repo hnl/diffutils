@@ -80,7 +80,7 @@ open (const char *filename, int flags, ...)
 #if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
   if (strcmp (filename, "/dev/null") == 0)
     filename = "NUL";
-#elif defined __amigaos4__ && defined __CLIB2__ /* amigaos4 clib2 */
+#elif defined __amigaos__ /* AmigaOS */
   if (strcmp (filename, "/dev/null") == 0)
     filename = "/nil";
 #endif

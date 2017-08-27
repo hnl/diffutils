@@ -103,7 +103,7 @@ getdtablesize (void)
 #  define rlim_cur rlim_max
 # endif
 
-# if defined __amigaos4__ && defined __CLIB2__ /* AmigaOS4 CLIB2 */
+# if defined __amigaos__ && defined __CLIB2__ /* AmigaOS using CLIB2 */
 #  define RLIMIT_NOFILE RLIM_NOFILE
 # endif
 

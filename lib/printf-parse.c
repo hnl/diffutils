@@ -76,7 +76,7 @@
 # include "c-ctype.h"
 #endif
 
-#if !(defined __amigaos4__ && defined __CLIB2__) /* AmigaOS4 CLIB2 */
+#if !(defined __amigaos__ && defined __CLIB2__) /* AmigaOS using CLIB2 */
 #ifdef STATIC
 STATIC
 #endif
